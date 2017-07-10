@@ -7,8 +7,30 @@ str = []
 shb= ""
 fname= ""
 stdflg=False
+stdinflg=False
 def err():
-  print("必要な引数がありません。\n使い方: {0} -s shebang -f file".format(argv[0]))
+  print("必要な引数がありません。\n使い方: {0} -s shebang -f file [-o]".format(argv[0]))
+  print("\n-o   結果を標準出力に出力します。")
+  exit()
+def ifstdin():
+  input=sys.stdin.read()
+  input=input.split("\n")
+  #str2=[]
+  str2=input
+  #for x in f:
+  #  str2=str2+[x]
+  #print("old str2: {}".format(str2))
+  if str2[0].count("#!"):
+    del(str2[0])
+  #str2="#!{0}\n{1}".format(shb,str2)
+  str2.insert(0,"#!{0}\n".format(shb))
+  #print("new str2: {}".format(str2))
+  f.close()
+  #f=open(fname,"w")
+  #for x in str2:
+  #  f.write(x)
+  for x in str2:
+    print(x, end="")
   exit()
 def ifstd():
   f=open(fname,'r')
@@ -41,6 +63,8 @@ for i in range(len(argv)):
           shb=argv[i+1]
         if argv[i].count("f"):
           fname=argv[i+1]
+          if(fname == "="):
+            stdinflg = True
         if argv[i].count("o"):
           stdflg=True
     except:
