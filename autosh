@@ -6,12 +6,34 @@ argv=sys.argv
 str = []
 shb= ""
 fname= ""
-
+stdflg=False
+def err():
+  print("必要な引数がありません。\n使い方: {0} -s shebang -f file".format(argv[0]))
+  exit()
+def ifstd():
+  f=open(fname,'r')
+  str2=[]
+  for x in f:
+    str2=str2+[x]
+  #print("old str2: {}".format(str2))
+  if str2[0].count("#!"):
+    del(str2[0])
+  #str2="#!{0}\n{1}".format(shb,str2)
+  str2.insert(0,"#!{0}\n".format(shb))
+  #print("new str2: {}".format(str2))
+  f.close()
+  #f=open(fname,"w")
+  #for x in str2:
+  #  f.write(x)
+  for x in str2:
+    print(x, end="")
+  exit()
 for i in range(len(argv)):
     str = []
     if not ( i == 0):
       for x in argv[i]:
         str=str+[x]
+      #print (str)
     try:
       if (str[0] == "-"):
         if argv[i].count( "s"):
@@ -19,9 +41,16 @@ for i in range(len(argv)):
           shb=argv[i+1]
         if argv[i].count("f"):
           fname=argv[i+1]
+        if argv[i].count("o"):
+          stdflg=True
     except:
       pass
 #print(str)
+if not fname:
+  err()
+if not shb:
+  err()
+
 import subprocess
 shb=subprocess.check_output(["which",shb])
 shb=shb.decode('utf-8')
@@ -34,15 +63,18 @@ def ifarg():
   str2=[]
   for x in f:
     str2=str2+[x]
-  print("old str2: {}".format(str2))
+  #print("old str2: {}".format(str2))
   if str2[0].count("#!"):
     del(str2[0])
   #str2="#!{0}\n{1}".format(shb,str2)
   str2.insert(0,"#!{0}\n".format(shb))
-  print("new str2: {}".format(str2))
+  #print("new str2: {}".format(str2))
   f.close()
   f=open(fname,"w")
   for x in str2:
     f.write(x)
   f.close()
+if (stdflg == True):
+  ifstd()
+  exit()
 ifarg()
