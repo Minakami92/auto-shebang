@@ -2,7 +2,6 @@
 #coding: utf-8
 
 import os, sys
-
 argv=sys.argv
 str = []
 shb= ""
