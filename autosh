@@ -11,9 +11,11 @@ stdflg=False
 stdinflg=False
 def err():
   errmsg= []
-  errmsg=errmsg.append("必要な引数がありません。\n使い方: {0} -s shebang -f (file or -) [-o]".format(argv[0]))
-  errmg=errmsg.append("\n-o   結果を標準出力に出力します。")
-  errmsg=errmsg.append("-f -   標準入力を入力とします。")
+  errmsg.append("必要な引数がありません。\n使い方: {0} -s shebang -f (file or -) [-o]".format(argv[0]))
+  errmsg.append("\n-o   結果を標準出力に出力します。")
+  errmsg.append("-f -   標準入力を入力とします。")
+  for x in errmsg:
+    print(x)
   exit()
 def ifstdin():
   input=sys.stdin.read()
