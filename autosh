@@ -2,6 +2,7 @@
 #coding: utf-8
 
 import os, sys
+
 argv=sys.argv
 str = []
 shb= ""
@@ -9,9 +10,10 @@ fname= ""
 stdflg=False
 stdinflg=False
 def err():
-  print("必要な引数がありません。\n使い方: {0} -s shebang -f (file or -) [-o]".format(argv[0]))
-  print("\n-o   結果を標準出力に出力します。")
-  print("-f -   標準入力を入力とします。")
+  errmsg= []
+  errmsg=errmsg.append("必要な引数がありません。\n使い方: {0} -s shebang -f (file or -) [-o]".format(argv[0]))
+  errmg=errmsg.append("\n-o   結果を標準出力に出力します。")
+  errmsg=errmsg.append("-f -   標準入力を入力とします。")
   exit()
 def ifstdin():
   input=sys.stdin.read()
